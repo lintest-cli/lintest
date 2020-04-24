@@ -1,0 +1,75 @@
+{
+  "name": "@mornya/lintest",
+  "version": "1.0.0",
+  "description": "Integrated lint and test environment project",
+  "keywords": [
+    "typescript",
+    "ecmascript",
+    "javascript",
+    "eslint",
+    "jest"
+  ],
+  "homepage": "https://github.com/mornya/lintest",
+  "license": "ISC",
+  "author": "mornya <mornya78@gmail.com>",
+  "private": false,
+  "repository": "https://github.com/mornya/lintest",
+  "bugs": "https://github.com/mornya/lintest/issues",
+  "types": "./types/index.d.ts",
+  "bin": {
+    "lintest": "bin/lintest.js"
+  },
+  "scripts": {
+    "build": "node ./build-script.js",
+    "lint": "eslint --color --no-eslintrc --config ./.eslintrc.js --ext .ts,.tsx,.js,.jsx,.mjs src",
+    "prepublishOnly": "npm run lint && npm run build"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "types",
+    "CHANGELOG.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=10",
+    "npm": ">=6"
+  },
+  "dependencies": {
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.2",
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.6",
+    "@typescript-eslint/eslint-plugin": "^2.29.0",
+    "@typescript-eslint/parser": "^2.29.0",
+    "chalk": "^4.0.0",
+    "cross-spawn": "^7.0.2",
+    "deepmerge": "^4.2.2",
+    "dotenv": "^8.2.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.19.0",
+    "fs-extra": "^9.0.0",
+    "jest": "^25.4.0",
+    "jest-diff": "^25.4.0",
+    "jest-transform-stub": "^2.0.0",
+    "json-stringify-pretty-compact": "^2.0.0",
+    "react": "^16.13.1",
+    "ts-jest": "^25.4.0",
+    "typescript": "^3.8.3",
+    "uglify-es": "^3.3.9"
+  },
+  "devDependencies": {
+    "@types/cross-spawn": "^6.0.1",
+    "@types/fs-extra": "^8.1.0",
+    "@types/uglify-es": "^3.0.0"
+  },
+  "optionalDependencies": {
+    "fsevents": "^1.2.12"
+  }
+}

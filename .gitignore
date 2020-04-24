@@ -1,0 +1,40 @@
+# See below url for more informations.
+# https://help.github.com/articles/ignoring-files
+
+# Local only
+/coverage
+/node_modules
+/build
+/out
+/dist
+/tmp
+/temp
+/temporary
+/.env
+/.env.local
+.DS_Store
+.eslintcache
+
+# Logs
+/logs
+*.log
+stats.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+/.idea
+/.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+**/*.iml
+
+# Private keys
+*.key
+*.p12
+*.pem
+*.pfx
+*.csr

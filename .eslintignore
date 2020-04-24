@@ -1,0 +1,10 @@
+# Ignoring lint directories and files
+
+# directories
+/.idea
+/coverage
+/node_modules
+/dist
+
+# configuration files
+.eslintrc.js
