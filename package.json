@@ -1,6 +1,6 @@
 {
   "name": "@mornya/lintest",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Integrated lint and test environment project",
   "keywords": [
     "typescript",
@@ -73,6 +73,8 @@
     "fsevents": "^1.2.12"
   },
   "bundledDependencies": [
+    "@typescript-eslint/eslint-plugin",
+    "@typescript-eslint/parser",
     "eslint",
     "eslint-plugin-jsx-a11y",
     "eslint-plugin-react",
