@@ -35,7 +35,7 @@ const cmdResultTest = commandModule.run(`${paths.ownNodeModules}/.bin/jest`, [
   '--coverageDirectory', `${paths.appPath}/coverage`,
   testConfig.isCoverage ? '--collectCoverage' : undefined,
   testConfig.isWatch ? '--watchAll' : undefined,
-]);
+].filter(Boolean));
 if (cmdResultTest) {
   if (!testConfig.isWatch) {
     console.log(chalk.green.bold('\n✔︎ All tests passed (even if no test).\n'));

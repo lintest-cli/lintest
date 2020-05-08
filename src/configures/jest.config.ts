@@ -97,6 +97,19 @@ const defaultConfig = {
       diagnostics: true,
     },
   },
+  collectCoverageFrom: [
+    ...roots.map(item => `${item}/**/*.{js,jsx}`),
+    '!<rootDir>/coverage/**',
+    '!<rootDir>/dist/**',
+    '!<rootDir>/build/**',
+    '!<rootDir>/out/**',
+    '!<rootDir>/public/**',
+    '!<rootDir>/node_modules/**',
+    '!<rootDir>/.idea/**',
+    '!<rootDir>/.vscode/**',
+    '!<rootDir>/.git/**',
+    '!<rootDir>/src/assets/**',
+  ],
 };
 
 function mapConfig<T extends any> (config: T): T {
