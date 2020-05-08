@@ -91,10 +91,6 @@ const defaultConfig = {
   snapshotSerializers: [
     'jest-serializer-vue',
   ],
-  watchPlugins: [
-    'jest-watch-typeahead/filename',
-    'jest-watch-typeahead/testname',
-  ],
   globals: {
     'ts-jest': {
       // configurations for ts-jest
