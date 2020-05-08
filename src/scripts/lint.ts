@@ -16,7 +16,7 @@ if (isFix) {
   console.log('📌 Run ESLint with TypeScript...');
 }
 
-const srcPath = fileModule.isFileExist(paths.appSrc) ? 'src' : '.';
+const srcPath = fileModule.isFileExist(paths.appSrc) ? paths.appSrc : '.';
 const cmdResultLint = commandModule.run(
   `${paths.ownNodeModules}/.bin/eslint`,
   [
