@@ -27,7 +27,7 @@ const cmdResultLint = commandModule.run(
     '--max-warnings', '100',
     isFix ? '--fix' : undefined,
     isDebug ? '--debug' : undefined,
-    '--ext', '.ts,.tsx,.js,.jsx,.mjs',
+    '--ext', '.ts,.tsx,.js,.jsx,.vue,.mjs',
     srcPath,
   ].filter(Boolean),
 );
