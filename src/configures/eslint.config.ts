@@ -17,6 +17,8 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:@typescript-eslint/eslint-recommended',
+    '@vue/standard',
+    '@vue/typescript',
   ],
   globals: {
     Atomics: 'readonly',
@@ -32,10 +34,11 @@ module.exports = {
     project: `${paths.appPath}/tsconfig.json`,
   },
   plugins: [
+    '@typescript-eslint',
+    'jsx-a11y',
     'react',
     'react-hooks',
-    'jsx-a11y',
-    '@typescript-eslint',
+    'vue',
   ],
   settings: {
     react: {

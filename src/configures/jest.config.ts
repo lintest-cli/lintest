@@ -11,6 +11,7 @@ interface ISetupFilesPath {
 const transform = {
   tsjest: `${paths.ownNodeModules}/ts-jest`,
   stub: `${paths.ownNodeModules}/jest-transform-stub`,
+  vuejest: `${paths.ownNodeModules}/vue-jest`,
 };
 const setupFilesPath: ISetupFilesPath[] = [
   { path: `${paths.appPath}/src/test/@setup.ts`, target: '<rootDir>/src/test/@setup.ts' },
@@ -58,6 +59,7 @@ const defaultConfig = {
   testEnvironment: 'jsdom',
   testURL: 'http://localhost',
   transform: {
+    '.vue$': transform.vuejest,
     '\\.([t|j]sx?|mjs)$': transform.tsjest,
     '\\.(bmp|gif|jpe?g|png|tiff?|ico|webp|svg|mp4|webm|flac|mp3|wav|ogg|aac|eot|[t|o]tf|woff2?)$': transform.stub,
     '\\.((sa|sc|c|le)ss|styl(us)?)$': transform.stub,
@@ -74,12 +76,25 @@ const defaultConfig = {
     '/.vscode',
     '/.git',
   ],
-  testRegex: '\\.test\\.([t|j]sx?|mjs)$',
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'mjs'],
+  testRegex: '\\.(test|spec)\\.([t|j]sx?|mjs)$',
+  moduleFileExtensions: [
+    'ts', 'tsx', 'js', 'jsx', 'mjs', 'json', 'vue',
+  ],
   moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '^~/(.*)$': '<rootDir>/src/$1',
+    '^@@/(.*)$': '<rootDir>/src/$1',
+    '^~~/(.*)$': '<rootDir>/src/$1',
     '\\.(bmp|gif|jpe?g|png|tiff?|ico|webp|svg|mp4|webm|flac|mp3|wav|ogg|aac|eot|[t|o]tf|woff2?)$': transform.stub,
     '\\.((sa|sc|c|le)ss|styl(us)?)$': transform.stub,
   },
+  snapshotSerializers: [
+    'jest-serializer-vue',
+  ],
+  watchPlugins: [
+    'jest-watch-typeahead/filename',
+    'jest-watch-typeahead/testname',
+  ],
   globals: {
     'ts-jest': {
       // configurations for ts-jest
