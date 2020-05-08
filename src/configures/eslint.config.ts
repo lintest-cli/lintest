@@ -24,14 +24,15 @@ module.exports = {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
   },
-  parser: '@typescript-eslint/parser',
+  parser: 'vue-eslint-parser',
   parserOptions: {
+    parser: '@typescript-eslint/parser',
     ecmaFeatures: {
       jsx: true,
     },
     ecmaVersion: 2018,
     sourceType: 'module',
-    project: `${paths.appPath}/tsconfig.json`,
+    //project: `${paths.appPath}/tsconfig.json`,
   },
   plugins: [
     '@typescript-eslint',
