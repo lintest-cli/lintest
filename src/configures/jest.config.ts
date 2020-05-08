@@ -89,7 +89,7 @@ const defaultConfig = {
     '\\.((sa|sc|c|le)ss|styl(us)?)$': transform.stub,
   },
   snapshotSerializers: [
-    'jest-serializer-vue',
+    `${paths.ownNodeModules}/jest-serializer-vue`,
   ],
   globals: {
     'ts-jest': {

@@ -11,6 +11,7 @@ Integrated lint and test environment project.
 - TypeScript / ES6+ support with [TypeScript](https://www.typescriptlang.org/).
 - Linting TypeScript / JavaScript codes with [ESLint](http://eslint.org/).
 - Testing codes with [Jest](https://facebook.github.io/jest/).
+- All available for React.js / Vue.js application
 
 ## Installation
 해당 라이브러리를 사용할 프로젝트에서 아래와 같이 설치한다.
