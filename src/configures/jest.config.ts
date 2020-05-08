@@ -99,8 +99,17 @@ const defaultConfig = {
   },
   //collectCoverage: true,
   collectCoverageFrom: [
-    ...roots.map(item => `${item}/**/*`),
-    '!<rootDir>/src/assets/**/*',
+    ...roots.map(item => `${item}/**/*.{js,jsx}`),
+    '!<rootDir>/coverage/**',
+    '!<rootDir>/dist/**',
+    '!<rootDir>/build/**',
+    '!<rootDir>/out/**',
+    '!<rootDir>/public/**',
+    '!<rootDir>/node_modules/**',
+    '!<rootDir>/.idea/**',
+    '!<rootDir>/.vscode/**',
+    '!<rootDir>/.git/**',
+    '!<rootDir>/src/assets/**',
   ],
 };
 

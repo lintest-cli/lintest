@@ -1,6 +1,6 @@
 {
   "name": "@mornya/lintest",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Integrated lint and test environment project",
   "keywords": [
     "typescript",

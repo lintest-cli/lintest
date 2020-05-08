@@ -30,10 +30,10 @@ const cmdResultTest = commandModule.run(`${paths.ownNodeModules}/.bin/jest`, [
   '--color', 'true',
   '--config', `${paths.ownPath}/dist/configures/jest.config.js`,
   '--rootDir', paths.appPath,
-  '--coverageDirectory', `${paths.appPath}/coverage`,
   '--passWithNoTests', // 테스트케이스가 하나도 없으면 종료시 0을 리턴하여 성공으로 표시
   //'--noStackTrace', // 테스트 실패시 stackTrack를 출력하지 않음
-  testConfig.isCoverage ? '--coverage' : undefined,
+  '--coverageDirectory', `${paths.appPath}/coverage`,
+  testConfig.isCoverage ? '--collectCoverage' : undefined,
   testConfig.isWatch ? '--watchAll' : undefined,
 ]);
 if (cmdResultTest) {
