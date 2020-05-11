@@ -16,9 +16,12 @@ if (isFix) {
   console.log('📌 Run ESLint with TypeScript...');
 }
 
-const srcPath = fileModule.isFileExist(paths.appSrc) ? './src' : '.';
+const executor: string = (process.cwd() === __dirname)
+  ? 'eslint' // 프로젝트 내 디펜던시로 설치되어 있는 경우
+  : `${__dirname}/../../node_modules/.bin/eslint`; // 글로벌 영역에 설치되어 있는 경우 (현재 스크립트 기준 "dist/scripts"임)
+const srcPath: string = fileModule.isFileExist(paths.appSrc) ? './src' : '.';
 const cmdResultLint = commandModule.run(
-  'eslint', // project/node_modules 경로에 설치됨
+  executor,
   [
     '--color',
     //'--no-eslintrc',

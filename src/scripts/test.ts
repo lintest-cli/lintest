@@ -25,8 +25,11 @@ if (fileModule.isFileExist(paths.appDotEnv)) {
 // run testcase with jest
 // ======================
 console.log('📌 Run testcase with Jest..\n'); // with add a new line!
+const executor: string = (process.cwd() === __dirname)
+  ? 'jest' // 프로젝트 내 디펜던시로 설치되어 있는 경우
+  : `${__dirname}/../../node_modules/.bin/jest`; // 글로벌 영역에 설치되어 있는 경우 (현재 스크립트 기준 "dist/scripts"임)
 const cmdResultTest = commandModule.run(
-  'jest', // project/node_modules 경로에 설치됨
+  executor,
   [
     '--color', 'true',
     '--config', `${paths.ownPath}/dist/configures/jest.config.js`,

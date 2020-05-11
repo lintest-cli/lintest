@@ -2,7 +2,6 @@
 'use strict'
 
 const chalk = require('chalk')
-const { paths } = require('../dist/configures/paths')
 const commandModule = require('../dist/methods/command')
 
 // Do this as the first thing so that any code reading it knows the right env.
@@ -23,13 +22,13 @@ const scriptIndex = args.findIndex(x => commandArgs.indexOf(x) !== -1)
 const script = scriptIndex === -1 ? args[0] : args[scriptIndex]
 const nodeArgs = scriptIndex > 0 ? args.slice(0, scriptIndex) : []
 
-if (commandArgs.indexOf(script) !== -1) {
-  commandModule.displayTitle()
+commandModule.displayTitle()
 
+if (commandArgs.indexOf(script) !== -1) {
   const cmdResultNode = commandModule.run(
     'node',
     [
-      `${paths.appNodeModules}/${commandModule.rootPackageJson.name}/dist/scripts/${script}`,
+      `${__dirname}/../dist/scripts/${script}`,
       nodeArgs.concat(args.slice(scriptIndex + 1)),
     ],
   )
@@ -38,5 +37,5 @@ if (commandArgs.indexOf(script) !== -1) {
     process.exit(1)
   }
 } else {
-  console.log(chalk.red(`Unknown command "${script}`))
+  console.log(chalk.red.bold(`\nUnknown command "${script}"\n`))
 }
