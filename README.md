@@ -11,15 +11,21 @@ Integrated lint and test environment project.
 - TypeScript / ES6+ support with [TypeScript](https://www.typescriptlang.org/).
 - Linting TypeScript / JavaScript codes with [ESLint](http://eslint.org/).
 - Testing codes with [Jest](https://facebook.github.io/jest/).
-- All available for React.js / Vue.js application
+- All available for Node.js / React.js / Vue.js (Nuxt.js) application
 
 ## Installation
-해당 라이브러리를 사용할 프로젝트에서 아래와 같이 설치한다.
+해당 라이브러리는 글로벌로 설치하거나 프로젝트 내에 설치할 수 있다.
 > `npm` 대신 `yarn` 사용시, 프로젝트 루트 경로에 `package-lock.json` 파일이 존재하면 제거하고 `yarn.lock` 파일만 참조되도록 한다.
 ```bash
 $ npm install --save-dev @mornya/lintest
 or
 $ yarn add -D @mornya/lintest
+```
+글로벌 설치를 위해서는 아래와 같이 실행한다.
+```bash
+$ npm install -g @mornya/lintest
+or
+$ yarn global add @mornya/lintest
 ```
 
 ## Execution
