@@ -1,6 +1,6 @@
 {
   "name": "@mornya/lintest",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Integrated lint and test environment project",
   "keywords": [
     "typescript",
@@ -43,8 +43,8 @@
   "dependencies": {
     "@types/jest": "^25.2.1",
     "@types/node": "^13.13.5",
-    "@types/react": "^16.9.34",
-    "@types/react-dom": "^16.9.7",
+    "@types/react": "^16.9.35",
+    "@types/react-dom": "^16.9.8",
     "@typescript-eslint/eslint-plugin": "^2.31.0",
     "@typescript-eslint/parser": "^2.31.0",
     "@vue/eslint-config-standard": "^5.1.2",
@@ -54,10 +54,14 @@
     "cross-spawn": "^7.0.2",
     "deepmerge": "^4.2.2",
     "dotenv": "^8.2.0",
-    "eslint": "^6.8.0",
+    "eslint": "6.8.0",
+    "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^4.0.0",
+    "eslint-plugin-standard": "^4.0.1",
     "eslint-plugin-vue": "^6.2.2",
     "fs-extra": "^9.0.0",
     "jest": "25.5.4",
@@ -66,11 +70,14 @@
     "jest-serializer-vue": "^2.0.2",
     "json-stringify-pretty-compact": "^2.0.0",
     "react": "^16.13.1",
-    "ts-jest": "^25.5.0",
+    "ts-jest": "^25.5.1",
     "typescript": "^3.8.3",
     "uglify-es": "^3.3.9",
+    "vue": "^2.6.11",
     "vue-eslint-parser": "^7.0.0",
-    "vue-jest": "^3.0.5"
+    "vue-jest": "^3.0.5",
+    "vue-template-compiler": "^2.6.11",
+    "webpack": "^4.43.0"
   },
   "devDependencies": {
     "@types/cross-spawn": "^6.0.1",
@@ -85,17 +92,21 @@
     "@typescript-eslint/parser",
     "@vue/eslint-config-standard",
     "@vue/eslint-config-typescript",
-    "eslint",
+    "eslint-plugin-import",
     "eslint-plugin-jsx-a11y",
+    "eslint-plugin-node",
+    "eslint-plugin-promise",
     "eslint-plugin-react",
     "eslint-plugin-react-hooks",
+    "eslint-plugin-standard",
     "eslint-plugin-vue",
-    "jest",
     "jest-transform-stub",
     "jest-serializer-vue",
     "react",
     "ts-jest",
+    "vue",
     "vue-eslint-parser",
-    "vue-jest"
+    "vue-jest",
+    "vue-template-compiler"
   ]
 }

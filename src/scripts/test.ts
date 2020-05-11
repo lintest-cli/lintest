@@ -24,18 +24,20 @@ if (fileModule.isFileExist(paths.appDotEnv)) {
 // ======================
 // run testcase with jest
 // ======================
-console.log('📌 Run testcase with Jest..');
-console.log(); // add new line
-const cmdResultTest = commandModule.run(`${paths.ownNodeModules}/.bin/jest`, [
-  '--color', 'true',
-  '--config', `${paths.ownPath}/dist/configures/jest.config.js`,
-  '--rootDir', paths.appPath,
-  '--passWithNoTests', // 테스트케이스가 하나도 없으면 종료시 0을 리턴하여 성공으로 표시
-  //'--noStackTrace', // 테스트 실패시 stackTrack를 출력하지 않음
-  '--coverageDirectory', `${paths.appPath}/coverage`,
-  testConfig.isCoverage ? '--collectCoverage' : undefined,
-  testConfig.isWatch ? '--watchAll' : undefined,
-].filter(Boolean));
+console.log('📌 Run testcase with Jest..\n'); // with add a new line!
+const cmdResultTest = commandModule.run(
+  'jest', // project/node_modules 경로에 설치됨
+  [
+    '--color', 'true',
+    '--config', `${paths.ownPath}/dist/configures/jest.config.js`,
+    '--rootDir', paths.appPath,
+    '--passWithNoTests', // 테스트케이스가 하나도 없으면 종료시 0을 리턴하여 성공으로 표시
+    //'--noStackTrace', // 테스트 실패시 stackTrack를 출력하지 않음
+    '--coverageDirectory', `${paths.appPath}/coverage`,
+    testConfig.isCoverage ? '--collectCoverage' : undefined,
+    testConfig.isWatch ? '--watchAll' : undefined,
+  ].filter(Boolean)
+);
 if (cmdResultTest) {
   if (!testConfig.isWatch) {
     console.log(chalk.green.bold('\n✔︎ All tests passed (even if no test).\n'));

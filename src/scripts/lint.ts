@@ -18,7 +18,7 @@ if (isFix) {
 
 const srcPath = fileModule.isFileExist(paths.appSrc) ? './src' : '.';
 const cmdResultLint = commandModule.run(
-  `${paths.ownNodeModules}/.bin/eslint`,
+  'eslint', // project/node_modules 경로에 설치됨
   [
     '--color',
     //'--no-eslintrc',
