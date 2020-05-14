@@ -54,6 +54,7 @@ module.exports = {
     'prefer-const': 'error',
     'no-console': 'off', // 라이브배포시 빌드오류를 막기 위해 off 한다 (개발완료시점에 console.* 지울것).
     'no-debugger': 'off', // 라이브배포시 빌드오류를 막기 위해 off 한다 (개발완료시점에 debugger 지울것).
+    'no-empty': 'warn',
     'no-inner-declarations': 'off',
     'no-multi-spaces': 'off',
     'no-return-assign': 'off',

@@ -29,7 +29,24 @@ $ yarn global add @mornya/lintest
 ```
 
 ## Execution
-프로젝트의 package.json 파일 내 lint와 test 설정은 아래와 같다.
+### CLI
+린트 및 테스트 수행은 CLI로 실행한다. lintest가 글로벌 모듈로 설치 되어있는 경우 커맨드라인에서 아래와 같이 실행 할 수 있다.
+```bash
+# 린트 실행시
+$ lintest lint [fix|debug]
+
+# 테스트 실행시
+$ lintest test [watch|coverage]
+```
+애플리케이션 내에서 린트 및 테스트 환경설정 내용이 필요할 경우 `export` 명령을 사용하여 생성된 환경설정 파일을 참조한다.
+수행결과는 `./node_modules/.cache/lintest` 하위 경로에 파일이 생성된다.
+> 환경설정 및 실행파일의 경로 정보 등이 포함되어 있다.
+```bash
+$ lintest export
+```
+
+### NPM
+NPM 프로젝트에서는 `npm run` 명령으로 실행되도록 아래와 같이 package.json 파일 내에 설정한다.
 ```json
 "scripts": {
   "lint": "lintest lint",

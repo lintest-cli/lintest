@@ -25,6 +25,15 @@ if (fileModule.isFileExist(paths.appDotEnv)) {
 // run testcase with jest
 // ======================
 console.log('📌 Run testcase with Jest..\n'); // with add a new line!
+
+if (paths.appTestSetupFiles.length === 1) {
+  console.log(`Setup file: ${paths.appTestSetupFiles[0]}\n`);
+} else if (paths.appTestSetupFiles.length > 1) {
+  console.log(`Setup files: ${paths.appTestSetupFiles.join(', ')}`);
+} else {
+  console.log(chalk.whiteBright.bold('No setup files found in project path.'));
+}
+
 const executor: string = (process.cwd() === __dirname)
   ? 'jest' // 프로젝트 내 디펜던시로 설치되어 있는 경우
   : `${__dirname}/../../node_modules/.bin/jest`; // 글로벌 영역에 설치되어 있는 경우 (현재 스크립트 기준 "dist/scripts"임)

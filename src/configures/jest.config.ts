@@ -1,44 +1,16 @@
-import chalk from 'chalk';
 import deepmerge from 'deepmerge';
+import { Config } from '@jest/types';
 import { paths } from './paths';
 import { isFileExist } from '../methods/file';
-
-interface ISetupFilesPath {
-  path: string;
-  target: string;
-}
 
 const transform = {
   tsjest: `${paths.ownNodeModules}/ts-jest`,
   stub: `${paths.ownNodeModules}/jest-transform-stub`,
   vuejest: `${paths.ownNodeModules}/vue-jest`,
 };
-const setupFilesPath: ISetupFilesPath[] = [
-  { path: `${paths.appPath}/src/test/@setup.ts`, target: '<rootDir>/src/test/@setup.ts' },
-  { path: `${paths.appPath}/src/test/@setup.js`, target: '<rootDir>/src/test/@setup.js' },
-  { path: `${paths.appPath}/test/@setup.ts`, target: '<rootDir>/test/@setup.ts' },
-  { path: `${paths.appPath}/test/@setup.js`, target: '<rootDir>/test/@setup.js' },
-  { path: `${paths.appPath}/test-setup.ts`, target: '<rootDir>/test-setup.ts' },
-  { path: `${paths.appPath}/test-setup.js`, target: '<rootDir>/test-setup.js' },
-];
-const setupFiles: string[] = [];
-const roots: string[] = [];
-
-// Checks existing test-setup files (@setup.t|js, test-setup.t|js) in each paths
-for (const setupFile of setupFilesPath) {
-  if (isFileExist(setupFile.path)) {
-    setupFiles.push(setupFile.target);
-    console.log(`Setup file: ${setupFile.path}`);
-    //break;
-  }
-}
-if (setupFiles.length) {
-  console.log();
-} else {
-  console.log(chalk.whiteBright.bold('No setup files found in project path.'));
-}
 
 // Checks test roots path
+const roots: string[] = [];
 if (isFileExist(paths.appSrc)) {
   roots.push('<rootDir>/src');
 }
@@ -53,9 +25,9 @@ if (!roots.length) {
 }
 
 // use "module.exports" (do not "export default")
-const defaultConfig = {
+const defaultConfig: Config.InitialOptions = {
   roots,
-  setupFiles,
+  setupFiles: paths.appTestSetupFiles,
   testEnvironment: 'jsdom',
   testURL: 'http://localhost',
   transform: {
@@ -76,7 +48,9 @@ const defaultConfig = {
     '/.vscode',
     '/.git',
   ],
-  testRegex: '\\.(test|spec)\\.([t|j]sx?|mjs)$',
+  testRegex: [
+    '\\.(test|spec)\\.([t|j]sx?|mjs)$',
+  ],
   moduleFileExtensions: [
     'ts', 'tsx', 'js', 'jsx', 'mjs', 'json', 'vue',
   ],
@@ -112,23 +86,32 @@ const defaultConfig = {
   ],
 };
 
-function mapConfig<T extends any> (config: T): T {
-  if (config.moduleNameMapper) {
-    Object.keys(config.moduleNameMapper)
-      .map((key: string) => {
-        config.moduleNameMapper[key] = config.moduleNameMapper[key]
-          .replace(/<moduleDir>/, paths.ownNodeModules)
-      });
+function mapConfig<T extends Config.InitialOptions> (config: T): T {
+  const moduleNameMapper: Config.InitialOptions['moduleNameMapper'] = config.moduleNameMapper;
+  if (moduleNameMapper) {
+    config.moduleNameMapper = Object.entries(moduleNameMapper)
+      .map((item) => {
+        if (Array.isArray(item[1])) {
+          item[1].map((subItem: string) => subItem.replace(/<moduleDir>/, paths.ownNodeModules));
+        } else {
+          item[1].replace(/<moduleDir>/, paths.ownNodeModules);
+        }
+        return item;
+      })
+      .reduce((acc, [key, value]) => {
+        acc[key] = value;
+        return acc;
+      }, {});
   }
   return config;
 }
 
 // 프로젝트 내 package.json > jest 설정 혹은 jest.config.js 파일이 존재하면
 // 기본설정에 overwrite, 정책상 불필요한 부분이면 아래 내용을 제거한다.
-let config;
+let config: Config.InitialOptions;
 if (isFileExist(`${paths.appPath}/jest.config.js`)) {
-  config = (async () => {
-    const jestConfig = await import(`${paths.appPath}/jest.config.js`);
+  config = (() => {
+    const jestConfig = require(`${paths.appPath}/jest.config.js`);
     return deepmerge(defaultConfig, mapConfig(jestConfig.default));
   })();
 } else {

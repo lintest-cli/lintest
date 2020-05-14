@@ -14,6 +14,7 @@ process.on('unhandledRejection', err => {
 })
 
 const commandArgs = [
+  'export',
   'lint',
   'test',
 ]

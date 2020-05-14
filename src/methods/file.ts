@@ -63,10 +63,16 @@ export function move (srcPath: string, tgtPath: string): void {
  *
  * @param srcPath {string} 복사 할 원본 디렉토리/파일 경로
  * @param tgtPath {string} 복사 대상 디렉토리/파일 경로
+ * @param isSymlink {boolean} 심볼릭링크 파일 여부
  */
-export function copy (srcPath: string, tgtPath: string): void {
+export function copy (srcPath: string, tgtPath: string, isSymlink: boolean = false): void {
   if (fs.existsSync(srcPath)) {
-    fs.copySync(srcPath, tgtPath, { dereference: true });
+    if (isSymlink) {
+      fs.removeSync(tgtPath); // 심볼릭링크라면 존재시 오류발생하므로 삭제해줘야 함
+      fs.symlinkSync(srcPath, tgtPath, 'junction');
+    } else {
+      fs.copySync(srcPath, tgtPath, { dereference: true, overwrite: true });
+    }
   }
 }
 
