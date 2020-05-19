@@ -15,6 +15,7 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
+    'plugin:vue/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     '@vue/standard',
@@ -30,7 +31,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 2018,
+    ecmaVersion: 2020,
     sourceType: 'module',
     //project: `${paths.appPath}/tsconfig.json`,
   },
@@ -39,6 +40,7 @@ module.exports = {
     'jsx-a11y',
     'react',
     'react-hooks',
+    'unicorn',
     'vue',
   ],
   settings: {
@@ -83,5 +85,9 @@ module.exports = {
     'vue/require-prop-types': 'off',
     'vue/singleline-html-element-content': 'off',
     'vue/singleline-html-element-content-newline': 'off',
+    // for unicorn
+    'unicorn/escape-case': 'error',
+    'unicorn/no-array-instanceof': 'error',
+    'unicorn/number-literal-case': 'error',
   },
 };

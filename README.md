@@ -1,8 +1,11 @@
 # Lintest
-![npm](https://img.shields.io/npm/v/@mornya/lintest)
+![version](https://img.shields.io/npm/v/@mornya/lintest)
 ![node](https://img.shields.io/node/v/@mornya/lintest)
-![NPM](https://img.shields.io/npm/l/@mornya/lintest)
+![types](https://img.shields.io/npm/types/@mornya/lintest)
+![downloads](https://img.shields.io/npm/dw/@mornya/lintest)
+![license](https://img.shields.io/npm/l/@mornya/lintest)
 <br>Copyright 2020. mornya. All rights reserved.
+<br>This is personal public version (Use [@lintest/cli](https://www.npmjs.com/package/@lintest/cli) for enterprise only).
 
 ## About
 Integrated lint and test environment project.
@@ -38,23 +41,25 @@ $ lintest lint [fix|debug]
 # 테스트 실행시
 $ lintest test [watch|coverage]
 ```
-애플리케이션 내에서 린트 및 테스트 환경설정 내용이 필요할 경우 `export` 명령을 사용하여 생성된 환경설정 파일을 참조한다.
-수행결과는 `./node_modules/.cache/lintest` 하위 경로에 파일이 생성된다.
-> 환경설정 및 실행파일의 경로 정보 등이 포함되어 있다.
+린트 및 테스트 환경설정 내용이 필요할 경우 `export` 명령을 사용하여 환경설정을 참고할 수 있다.<br>
+수행결과는 프로젝트 루트 경로에 `eslint.config.json` 및 `jest.config.json` 파일이 생성된다.<br>
+만약 정상적인 출력이 되지 않는다면 `debug` 파라미터로 확인한다.
 ```bash
-$ lintest export
+$ lintest export [debug]
 ```
 
 ### NPM
 NPM 프로젝트에서는 `npm run` 명령으로 실행되도록 아래와 같이 package.json 파일 내에 설정한다.
 ```json
-"scripts": {
-  "lint": "lintest lint",
-  "lint:fix": "lintest lint fix",
-  "lint:debug": "lintest lint debug",
-  "test": "lintest test",
-  "test:watch": "lintest test watch",
-  "test:coverage": "lintest test coverage"
+{
+  "scripts": {
+    "lint": "lintest lint",
+    "lint:fix": "lintest lint fix",
+    "lint:debug": "lintest lint debug",
+    "test": "lintest test",
+    "test:watch": "lintest test watch",
+    "test:coverage": "lintest test coverage"
+  }
 }
 ```
 

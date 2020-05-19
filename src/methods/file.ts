@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs-extra';
+import glob from 'glob';
 import pretty from 'json-stringify-pretty-compact';
 
 /**
@@ -175,4 +176,30 @@ export function getDirectoryFiles (
     });
   };
   searchList(dir);
+}
+
+/**
+ * getFilteredExistPaths
+ *
+ * @param rootPath {string}
+ * @param targetPaths {string[]}
+ * @param isOnly {boolean}
+ * @returns {string[]}
+ */
+export function getFilteredExistPaths (rootPath: string, targetPaths: string[] = [], isOnly: boolean = false): string[] {
+  const result: string[] = [];
+  for (const testPath of targetPaths) {
+    const matches = glob.sync(`${rootPath}${testPath}`, { silent: true });
+
+    if (matches.length > 1) {
+      matches.forEach((match: string) => result.push(match.replace(rootPath, '')));
+    } else if (matches.length === 1) {
+      result.push(matches[0].replace(rootPath, ''));
+    }
+
+    if (isOnly) {
+      break;
+    }
+  }
+  return result;
 }

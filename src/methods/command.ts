@@ -70,8 +70,10 @@ export function get (cmd: string, args: IArgs): string {
 
 /**
  * displayTitle
- * 앱 타이틀 표시 (vessel.js에서 사용)
+ * 앱 타이틀 표시
  */
 export function displayTitle (): void {
   console.log(`${chalk.whiteBright.bgMagenta(' Lintest ')} ${chalk.gray(`version ${rootPackageJson.version}`)}`);
+  console.log('Integrated lint and test environment project.');
+  console.log(`This is personal public version (Use ${chalk.cyan('@lintest/cli')} for enterprise only)`);
 }

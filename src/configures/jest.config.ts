@@ -1,7 +1,7 @@
 import deepmerge from 'deepmerge';
 import { Config } from '@jest/types';
 import { paths } from './paths';
-import { isFileExist } from '../methods/file';
+import { isFileExist, getFilteredExistPaths } from '../methods/file';
 
 const transform = {
   tsjest: `${paths.ownNodeModules}/ts-jest`,
@@ -9,25 +9,33 @@ const transform = {
   vuejest: `${paths.ownNodeModules}/vue-jest`,
 };
 
-// Checks test roots path
-const roots: string[] = [];
-if (isFileExist(paths.appSrc)) {
-  roots.push('<rootDir>/src');
+// Gets test roots path
+const testRoots = getFilteredExistPaths(paths.appPath, [
+  '/src',
+  '/src/test',
+  '/src/tests',
+  '/test',
+  '/tests',
+]);
+
+// Gets test-setup files in test roots path
+const setupFiles = [
+  // root test-setup file
+  ...getFilteredExistPaths(paths.appPath, ['/test-setup.*']),
+  // subdir @setup.* files
+  ...getFilteredExistPaths(paths.appPath, testRoots.map((root: string) => `${root}/@setup.*`)),
+].map((p: string) => `<rootDir>${p}`);
+
+// Finally insert root path
+if (!testRoots.length) {
+  testRoots.push('');
 }
-if (isFileExist(`${paths.appSrc}/test`)) {
-  roots.push('<rootDir>/src/test');
-}
-if (isFileExist(`${paths.appPath}/test`)) {
-  roots.push('<rootDir>/test');
-}
-if (!roots.length) {
-  roots.push('<rootDir>');
-}
+const roots = testRoots.map((p: string) => `<rootDir>${p}`);
 
 // use "module.exports" (do not "export default")
 const defaultConfig: Config.InitialOptions = {
   roots,
-  setupFiles: paths.appTestSetupFiles,
+  setupFiles,
   testEnvironment: 'jsdom',
   testURL: 'http://localhost',
   transform: {
@@ -48,9 +56,7 @@ const defaultConfig: Config.InitialOptions = {
     '/.vscode',
     '/.git',
   ],
-  testRegex: [
-    '\\.(test|spec)\\.([t|j]sx?|mjs)$',
-  ],
+  testRegex: '\\.(test|spec)\\.([t|j]sx?|mjs)$',
   moduleFileExtensions: [
     'ts', 'tsx', 'js', 'jsx', 'mjs', 'json', 'vue',
   ],

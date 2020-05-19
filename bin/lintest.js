@@ -2,7 +2,15 @@
 'use strict'
 
 const chalk = require('chalk')
+const { paths } = require('../dist/configures/paths')
 const commandModule = require('../dist/methods/command')
+const fileModule = require('../dist/methods/file')
+
+// IS_LOCAL_ENV 환경설정값이 false로 존재한다면 실행 무시 (빌드/배포환경에 따라 해당 값을 설정해준다)
+if (process.env.IS_LOCAL_ENV === 'false') {
+  chalk.red.bold(`\nExecution bypassed by environment variable.\n`)
+  process.exit(0)
+}
 
 // Do this as the first thing so that any code reading it knows the right env.
 process.env.NODE_ENV = 'production'
@@ -28,15 +36,17 @@ commandModule.displayTitle()
 if (commandArgs.indexOf(script) !== -1) {
   const cmdResultNode = commandModule.run(
     'node',
-    [
-      `${__dirname}/../dist/scripts/${script}`,
-      nodeArgs.concat(args.slice(scriptIndex + 1)),
-    ],
+    [`${__dirname}/../dist/scripts/${script}`, nodeArgs.concat(args.slice(scriptIndex + 1))],
   )
 
   if (!cmdResultNode) {
     process.exit(1)
   }
 } else {
-  console.log(chalk.red.bold(`\nUnknown command "${script}"\n`))
+  if (script) {
+    console.log(chalk.red.bold(`\nUnknown command "${script}"\n`))
+  } else {
+    console.log(chalk.red.bold('\nNo command entered.\n'))
+  }
+  console.log('Available command is', commandArgs.map(v => chalk.cyan(v)).join(', '), '\n')
 }
