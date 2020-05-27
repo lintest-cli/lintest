@@ -61,12 +61,13 @@ const defaultConfig: Config.InitialOptions = {
     'ts', 'tsx', 'js', 'jsx', 'mjs', 'json', 'vue',
   ],
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1',
-    '^~/(.*)$': '<rootDir>/src/$1',
+    // 순서주의!! 확장자 형식부터 체크해야 함
+    '\\.((sa|sc|c|le)ss|styl(us)?)$': transform.stub,
+    '\\.(bmp|gif|jpe?g|png|tiff?|ico|webp|svg|mp4|webm|flac|mp3|wav|ogg|aac|eot|[t|o]tf|woff2?)$': transform.stub,
     '^@@/(.*)$': '<rootDir>/src/$1',
     '^~~/(.*)$': '<rootDir>/src/$1',
-    '\\.(bmp|gif|jpe?g|png|tiff?|ico|webp|svg|mp4|webm|flac|mp3|wav|ogg|aac|eot|[t|o]tf|woff2?)$': transform.stub,
-    '\\.((sa|sc|c|le)ss|styl(us)?)$': transform.stub,
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '^~/(.*)$': '<rootDir>/src/$1',
   },
   snapshotSerializers: [
     `${paths.ownNodeModules}/jest-serializer-vue`,
