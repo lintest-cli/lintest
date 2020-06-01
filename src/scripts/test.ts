@@ -9,8 +9,9 @@ import * as fileModule from '../methods/file';
 
 const args = process.argv.slice(2).map(arg => arg.trim().toLowerCase());
 const testConfig: ITestConfig = {
-  isWatch: (args[0] && args[0].toLowerCase() === 'watch') || false,
-  isCoverage: (args[0] && args[0].toLowerCase() === 'coverage') || false,
+  isCoverage: args.findIndex(arg => arg === 'coverage') !== -1,
+  isNoCache: args.findIndex(arg => arg === 'nocache') !== -1,
+  isWatch: args.findIndex(arg => arg === 'watch') !== -1,
 };
 
 // ====================================
@@ -40,6 +41,7 @@ const cmdResultTest = commandModule.run(
     '--coverageDirectory', `${paths.appPath}/coverage`,
     testConfig.isCoverage ? '--collectCoverage' : undefined,
     testConfig.isWatch ? '--watchAll' : undefined,
+    testConfig.isNoCache ? '--no-cache' : undefined,
   ].filter(Boolean)
 );
 if (cmdResultTest) {

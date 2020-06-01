@@ -1,12 +1,16 @@
 # Change Log
 All notable version changes would be documented in this file.
 
+## 1.4.0
+> Minor version updated at 2020.06.01
+- Chores: Update dependencies
+- Performance Improvements: Added `nocache` option for eslint and jest
+
 ## 1.3.0
 > Minor version updated at 2020.05.27
 - Chores: Update dependencies
 - Bug Fixes: Corrects some Jest configuration
-- Performance Improvements
-  - Added some eslint rules
+- Performance Improvements: Added some eslint rules
 
 ## 1.2.0
 > Minor version updated at 2020.05.19

@@ -1,16 +1,19 @@
 import chalk from 'chalk';
-import { paths } from '../configures/paths';
+import { paths, targetFileExtensions } from '../configures/paths';
 import * as commandModule from '../methods/command';
 import * as fileModule from '../methods/file';
 
 // ==========
 // run eslint
 // ==========
-const args = process.argv.slice(2);
-const isFix = args.findIndex(arg => arg === 'fix') !== -1;
-const isDebug = args.findIndex(arg => arg === 'debug') !== -1;
+const args = process.argv.slice(2).map(arg => arg.trim().toLowerCase());
+const lintConfig: ILintConfig = {
+  isFix: args.findIndex(arg => arg === 'fix') !== -1,
+  isDebug: args.findIndex(arg => arg === 'debug') !== -1,
+  isNoCache: args.findIndex(arg => arg === 'nocache') !== -1,
+};
 
-if (isFix) {
+if (lintConfig.isFix) {
   console.log('📌 Run ESLint with TypeScript, auto-fix mode...');
 } else {
   console.log('📌 Run ESLint with TypeScript...');
@@ -28,9 +31,11 @@ const cmdResultLint = commandModule.run(
     '--config', `${paths.ownPath}/dist/configures/eslint.config.js`,
     '--resolve-plugins-relative-to', paths.ownNodeModules, // set plugins in node_modules path
     '--max-warnings', '100',
-    isFix ? '--fix' : undefined,
-    isDebug ? '--debug' : undefined,
-    '--ext', '.ts,.tsx,.js,.jsx,.vue,.mjs',
+    '--ext', targetFileExtensions.map((ext: string) => `.${ext}`).join(','),
+    '--cache-location', `${paths.appNodeModulesCache}/lintest/eslintcache`,
+    lintConfig.isFix ? '--fix' : undefined,
+    lintConfig.isDebug ? '--debug' : undefined,
+    lintConfig.isNoCache ? undefined : '--cache',
     srcPath,
   ].filter(Boolean),
 );

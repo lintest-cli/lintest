@@ -1,6 +1,6 @@
 import deepmerge from 'deepmerge';
 import { Config } from '@jest/types';
-import { paths } from './paths';
+import { paths, targetFileExtensions } from './paths';
 import { isFileExist, getFilteredExistPaths } from '../methods/file';
 
 const transform = {
@@ -38,6 +38,7 @@ const defaultConfig: Config.InitialOptions = {
   setupFiles,
   testEnvironment: 'jsdom',
   testURL: 'http://localhost',
+  cacheDirectory: `${paths.appNodeModulesCache}/lintest/jestcache`,
   transform: {
     '.vue$': transform.vuejest,
     '\\.([t|j]sx?|mjs)$': transform.tsjest,
@@ -57,9 +58,7 @@ const defaultConfig: Config.InitialOptions = {
     '/.git',
   ],
   testRegex: '\\.(test|spec)\\.([t|j]sx?|mjs)$',
-  moduleFileExtensions: [
-    'ts', 'tsx', 'js', 'jsx', 'mjs', 'json', 'vue',
-  ],
+  moduleFileExtensions: targetFileExtensions,
   moduleNameMapper: {
     // 순서주의!! 확장자 형식부터 체크해야 함
     '\\.((sa|sc|c|le)ss|styl(us)?)$': transform.stub,

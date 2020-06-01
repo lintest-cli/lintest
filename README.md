@@ -36,10 +36,10 @@ $ yarn global add @mornya/lintest
 린트 및 테스트 수행은 CLI로 실행한다. lintest가 글로벌 모듈로 설치 되어있는 경우 커맨드라인에서 아래와 같이 실행 할 수 있다.
 ```bash
 # 린트 실행시
-$ lintest lint [fix|debug]
+$ lintest lint [fix|debug|nocache]
 
 # 테스트 실행시
-$ lintest test [watch|coverage]
+$ lintest test [watch|coverage|nocache]
 ```
 린트 및 테스트 환경설정 내용이 필요할 경우 `export` 명령을 사용하여 환경설정을 참고할 수 있다.<br>
 수행결과는 프로젝트 루트 경로에 `eslint.config.json` 및 `jest.config.json` 파일이 생성된다.<br>
@@ -55,10 +55,10 @@ NPM 프로젝트에서는 `npm run` 명령으로 실행되도록 아래와 같�
   "scripts": {
     "lint": "lintest lint",
     "lint:fix": "lintest lint fix",
-    "lint:debug": "lintest lint debug",
+    "lint:debug": "lintest lint debug nocache",
     "test": "lintest test",
     "test:watch": "lintest test watch",
-    "test:coverage": "lintest test coverage"
+    "test:coverage": "lintest test coverage nocache"
   }
 }
 ```

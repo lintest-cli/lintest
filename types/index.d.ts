@@ -13,7 +13,14 @@ interface IPaths {
   appDotEnv: string;
 }
 
+interface ILintConfig {
+  isFix: boolean;
+  isDebug: boolean;
+  isNoCache: boolean;
+}
+
 interface ITestConfig {
-  isWatch: boolean;
   isCoverage: boolean;
+  isNoCache: boolean;
+  isWatch: boolean;
 }

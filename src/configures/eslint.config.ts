@@ -1,6 +1,9 @@
-import { paths } from './paths';
+import { paths, targetFileExtensions } from './paths';
 
-const currReactVersion = require(`${paths.ownNodeModules}/react`).version;
+const versions = {
+  jest: require(`${paths.ownNodeModules}/jest/package.json`).version,
+  react: require(`${paths.ownNodeModules}/react/package.json`).version,
+};
 
 // use "module.exports" (do not "export default")
 module.exports = {
@@ -24,7 +27,9 @@ module.exports = {
     },
     ecmaVersion: 2020,
     sourceType: 'module',
-    //project: `${paths.appPath}/tsconfig.json`,
+    tsconfigRootDir: __dirname,
+    createDefaultProgram: true,
+    project: `${paths.appPath}/tsconfig.json`,
   },
   extends: [
     // node plugin은 standard plugin에서 사용하므로 여기서 선언하지 않는다 (eslint-plugin-node).
@@ -54,11 +59,15 @@ module.exports = {
     'vue',
   ],
   settings: {
+    jest: {
+      version: versions.jest,
+    },
     react: {
       createClass: 'createReactClass', // Regex for Component Factory to use, default to "createReactClass"
       pragma: 'React', // Pragma to use, default to "React"
-      version: currReactVersion,
+      version: versions.react,
     },
+    'import/extensions': targetFileExtensions.map(ext => `.${ext}`),
   },
   ignorePatterns: [], // .eslintignore 파일 사용시 매핑됨
   rules: {

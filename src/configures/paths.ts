@@ -21,3 +21,6 @@ export const paths: IPaths = {
   appNodeModulesCache: resolveApp('node_modules/.cache'),
   appDotEnv: resolveApp('.env'),
 };
+
+// lint 및 jest 실행대상 파일 확장자명
+export const targetFileExtensions = ['ts', 'tsx', 'js', 'jsx', 'vue', 'json', 'mjs'];
